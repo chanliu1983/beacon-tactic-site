@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beacon Tactic — turn-based artillery on ground you can blow apart</title>
+<meta name="description" content="Beacon Tactic is turn-based artillery on fully destructible voxel terrain. Plant beacons, hold ground, outscore the other side. Solo or 4v4.">
+<meta property="og:title" content="Beacon Tactic">
+<meta property="og:description" content="Turn-based artillery on ground you can blow apart — and build back up.">
+<meta property="og:image" content="assets/01-battlefield.jpg">
+<style>
+  :root {
+    --bg:#12141a; --panel:#1a1d26; --panel2:#20242f; --ink:#e8e6e1;
+    --dim:#a4a8b4; --gold:#e0b74a; --line:#2c303c;
+  }
+  @media (prefers-color-scheme: light) {
+    :root { --bg:#fbfaf7; --panel:#fff; --panel2:#f3f1ec; --ink:#1c1f26;
+            --dim:#5d6270; --gold:#a8801a; --line:#e4e1da; }
+  }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; background:var(--bg); color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",
+         "PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap { max-width:1040px; margin:0 auto; padding:0 22px; }
+  header.top {
+    display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+    padding:22px 0; border-bottom:1px solid var(--line);
+  }
+  .logo { font-weight:700; letter-spacing:.14em; font-size:.86rem; flex:1 1 auto; }
+  .lang { display:inline-flex; border:1px solid var(--line); border-radius:999px;
+          overflow:hidden; background:var(--panel); }
+  .lang button { appearance:none; border:0; background:transparent; color:var(--dim);
+    font:inherit; font-size:.85rem; padding:7px 15px; cursor:pointer; }
+  .lang button[aria-pressed="true"] { background:var(--gold); color:#17191f; font-weight:600; }
+  .lang button:focus-visible { outline:2px solid var(--gold); outline-offset:-2px; }
+
+  .hero { padding:74px 0 56px; text-align:center; }
+  .hero h1 {
+    margin:0 0 14px; font-size:clamp(2.4rem,7vw,4.2rem); line-height:1.02;
+    letter-spacing:-.025em; font-weight:800;
+  }
+  .hero h1 .accent { color:var(--gold); }
+  .hero p.tag { margin:0 auto 30px; max-width:34em; font-size:1.14rem; color:var(--dim); }
+  .cta { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+  .cta a {
+    display:inline-block; text-decoration:none; border-radius:999px;
+    padding:11px 24px; font-size:.95rem; font-weight:600;
+    border:1px solid var(--line); color:var(--ink); background:var(--panel);
+  }
+  .cta a.primary { background:var(--gold); border-color:var(--gold); color:#17191f; }
+  .cta a:hover { border-color:var(--gold); }
+
+  figure { margin:0; }
+  figure img {
+    display:block; width:100%; height:auto; border-radius:12px;
+    border:1px solid var(--line); background:var(--panel2);
+  }
+  figcaption { margin-top:10px; font-size:.9rem; color:var(--dim); text-align:center; }
+  .shot { margin:0 0 34px; }
+
+  section { padding:52px 0; border-top:1px solid var(--line); }
+  h2 { font-size:clamp(1.5rem,3.6vw,2rem); margin:0 0 18px; letter-spacing:-.02em; }
+  h3 { font-size:1.05rem; margin:0 0 4px; }
+  .lede { font-size:1.06rem; color:var(--dim); max-width:44em; margin:0 0 28px; }
+  .cols { display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(232px,1fr)); }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:11px; padding:18px; }
+  .card p { margin:0; font-size:.94rem; color:var(--dim); }
+  .card p + p { margin-top:9px; }
+  .card .who { color:var(--ink); font-weight:650; margin:0 0 2px; }
+  .card .role { font-size:.76rem; letter-spacing:.13em; color:var(--gold);
+                text-transform:uppercase; margin:0 0 9px; }
+  ul.plain { padding-left:1.2em; margin:0; }
+  ul.plain li { margin-bottom:9px; }
+  .stat { display:flex; gap:34px; flex-wrap:wrap; margin:0 0 26px; padding:0; list-style:none; }
+  .stat b { display:block; font-size:1.9rem; letter-spacing:-.02em; }
+  .stat span { font-size:.85rem; color:var(--dim); }
+
+  footer { border-top:1px solid var(--line); padding:38px 0 60px; color:var(--dim); font-size:.92rem; }
+  footer a { color:var(--gold); }
+  footer .row { display:flex; gap:22px; flex-wrap:wrap; margin-bottom:14px; }
+  [hidden] { display:none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="logo">BEACON TACTIC</div>
+  <div class="lang" role="group" aria-label="Language">
+    <button id="btn-en" type="button" aria-pressed="true">English</button>
+    <button id="btn-zh" type="button" aria-pressed="false">中文</button>
+  </div>
+</header>
+
+<!-- ============================ ENGLISH ============================ -->
+<main id="en" lang="en">
+
+  <div class="hero">
+    <h1>Every shot changes<br>the ground it <span class="accent">lands on</span>.</h1>
+    <p class="tag">Turn-based artillery on fully destructible voxel terrain. Eight animal
+    knights, two sides, four each. Blow the hills away, build them back, and hold the
+    beacons that decide the match.</p>
+    <div class="cta">
+      <a class="primary" href="https://github.com/chanliu1983/beacon-tactic-site/issues/new">Report a problem</a>
+      <a href="privacy.html">Privacy policy</a>
+    </div>
+  </div>
+
+  <figure class="shot">
+    <img src="assets/01-battlefield.jpg" width="1600" height="1000"
+         alt="Four animal knights on a voxel archipelago, with craters, built walls and a beacon claiming ground.">
+  </figure>
+
+  <section>
+    <h2>The match</h2>
+    <p class="lede">Beacon War is the whole game. Every ten rounds a knight may plant a
+    territory beacon at their feet, and its disc scores for your side for as long as it
+    stands. First side to 100 points wins.</p>
+    <ul class="stat">
+      <li><b>4 v 4</b><span>eight knights</span></li>
+      <li><b>100</b><span>points to win</span></li>
+      <li><b>10</b><span>rounds per beacon</span></li>
+      <li><b>1</b><span>you, or seven friends</span></li>
+    </ul>
+    <div class="cols">
+      <div class="card">
+        <p class="who">It punishes a lead</p>
+        <p>Every five rounds, if one side leads by more than five points, lightning
+        strikes that side's masts for 20 each. It never fells a fresh one alone — the
+        warning round is for repairing, or accepting.</p>
+      </div>
+      <div class="card">
+        <p class="who">Ground breaks in two bites</p>
+        <p>Blocks carry 80 hit points and the strongest weapon in the game does 65, so
+        the first blast only cracks. The next shot into the same crater takes it. Two
+        shots is the floor, on purpose.</p>
+      </div>
+      <div class="card">
+        <p class="who">Build it back</p>
+        <p>Hold the build button and drag across a face: a floor gives a platform, a
+        wall gives a wall. A hillside you flattened last round is a firing step this one.</p>
+      </div>
+    </div>
+  </section>
+
+  <figure class="shot">
+    <img src="assets/02-storm-round.jpg" width="1600" height="1000"
+         alt="Lightning striking down onto a mast on the leading side of the match.">
+    <figcaption>A storm round. The sky comes down on whoever is winning.</figcaption>
+  </figure>
+
+  <section>
+    <h2>Four crews</h2>
+    <p class="lede">Every crew is a different answer to the same problem, and every one
+    of them has a gap.</p>
+    <div class="cols">
+      <div class="card">
+        <p class="role">Siege</p><p class="who">BRUIN the Bear</p>
+        <p>140 HP on an 80 AP turn. Rocket and mortar, full damage to beacons, and a
+        skydive that lands like a meteor. Too heavy to fly.</p>
+      </div>
+      <div class="card">
+        <p class="role">Engineer</p><p class="who">CRIMSON the Beaver</p>
+        <p>Beacons for 25 AP and 10 m wide, repairs them, blinks home, and builds at a
+        quarter of everyone else's price. A repair bot does the walking for her.</p>
+      </div>
+      <div class="card">
+        <p class="role">Scout</p><p class="who">BOGUE the Frog</p>
+        <p>Light and quick. Cloak, jetpack and glider; rifle, shotgun and the net
+        launcher; a drone that lifts the fog for the whole team.</p>
+      </div>
+      <div class="card">
+        <p class="role">Guardian</p><p class="who">HEDGEBRO the Hedgehog</p>
+        <p>90 HP, sniper and grenades, and a dome for an ally or a beacon. Flies and
+        glides. Steps in front when a rocket is already on its way.</p>
+      </div>
+    </div>
+  </section>
+
+  <figure class="shot">
+    <img src="assets/03-territory.jpg" width="1600" height="1000"
+         alt="A beacon standing in the middle of the disc of ground it scores for its side.">
+    <figcaption>A mast, and the disc of ground it scores for your side.</figcaption>
+  </figure>
+
+  <section>
+    <h2>Build, don't only shoot</h2>
+    <p class="lede">Points also buy Autometa, and Autometa buys robots. A guard draws
+    power only from inside its mast's disc, and a dead one can be rebuilt on the pad it
+    left standing.</p>
+    <div class="cols">
+      <div class="card"><p class="who">COMBAT</p>
+        <p>Fires on its owner's turn. A guaranteed hit — no wind, no aim window.</p></div>
+      <div class="card"><p class="who">WATCHER</p>
+        <p>Marks enemies and strips cloaks. Its marks are what most other traits read.</p></div>
+      <div class="card"><p class="who">BULWARK</p>
+        <p>Cuts incoming damage for allies standing in its ring.</p></div>
+      <div class="card"><p class="who">PHALANX</p>
+        <p>Shares the wounds of everyone inside its aura.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Also in the box</h2>
+    <ul class="plain">
+      <li>A painted six-page comic, <strong>Beacon Knights</strong>, that tells where all of this came from.</li>
+      <li>A training hall of four rooms, where an owl who has lost before walks you through the bars, the movement and the swing.</li>
+      <li>A saved-position walkthrough that explains the board one bubble at a time.</li>
+      <li>English and Chinese, switchable at any time.</li>
+    </ul>
+  </section>
+</main>
+
+<!-- ============================== 中文 ============================== -->
+<main id="zh" lang="zh-Hans" hidden>
+
+  <div class="hero">
+    <h1>每一发，<br>都会改变<span class="accent">它落点处</span>的地面。</h1>
+    <p class="tag">在可以炸碎、也可以重新建起来的体素地形上打回合制炮击。八名动物骑士，
+    两边各四名。把山坡轰平，再搭回来，守住决定胜负的信标。</p>
+    <div class="cta">
+      <a class="primary" href="https://github.com/chanliu1983/beacon-tactic-site/issues/new">反馈问题</a>
+      <a href="privacy.html">隐私政策</a>
+    </div>
+  </div>
+
+  <figure class="shot">
+    <img src="assets/01-battlefield.jpg" width="1600" height="1000"
+         alt="体素群岛上的四名动物骑士，周围是弹坑、筑起的墙和一座宣示领土的信标。">
+  </figure>
+
+  <section>
+    <h2>对局</h2>
+    <p class="lede">Beacon War 就是全部。每十回合，骑士可以在自己脚下种下一座领土信标；
+    只要它还立着，它的领地就为这一方计分。先到 100 分的一方获胜。</p>
+    <ul class="stat">
+      <li><b>4 v 4</b><span>八名骑士</span></li>
+      <li><b>100</b><span>分制胜局</span></li>
+      <li><b>10</b><span>回合种一座</span></li>
+      <li><b>1</b><span>人或七位朋友</span></li>
+    </ul>
+    <div class="cols">
+      <div class="card">
+        <p class="who">领先会招来雷击</p>
+        <p>每五回合，如果一方领先超过 5 分，那一方的信标会被每座扣 20 血。不足以一击
+        击倒一座新的，那一轮留给你修补，或者接受。</p>
+      </div>
+      <div class="card">
+        <p class="who">地面要打两次才开</p>
+        <p>方块有 80 点耐久，全游戏最强的武器也只有 65，所以第一发只能打裂；同一个坑里
+        的第二发才清得掉。两发是设计下限。</p>
+      </div>
+      <div class="card">
+        <p class="who">再把它建回来</p>
+        <p>按住建造键在面上拖动：对地面拖出平台，对墙面拖出墙。上一回合炸平的山坡，
+        这一回合就是你的射击台阶。</p>
+      </div>
+    </div>
+  </section>
+
+  <figure class="shot">
+    <img src="assets/02-storm-round.jpg" width="1600" height="1000"
+         alt="闪电劈向领先一方的信标。">
+    <figcaption>风暴回合。天空砸向领先的一方。</figcaption>
+  </figure>
+
+  <section>
+    <h2>四个角色</h2>
+    <p class="lede">每个角色都是对同一个问题的不同解法，而且每个都有破绽。</p>
+    <div class="cols">
+      <div class="card">
+        <p class="role">攻坚</p><p class="who">布鲁因 · 熊</p>
+        <p>140 血，每回合 80 行动点。火箭筒和迫击炮，对信标全额伤害，还有一次像流星
+        一样落地的空降。太重，飞不起来。</p>
+      </div>
+      <div class="card">
+        <p class="role">工程</p><p class="who">克里姆森 · 河狸</p>
+        <p>信标只要 25 行动点、半径 10 米，能修补、能闪现回家，建造只要别人四分之一的价格。
+        还有一只库珀机器人替她跑腿。</p>
+      </div>
+      <div class="card">
+        <p class="role">侦察</p><p class="who">博格 · 青蛙</p>
+        <p>轻而快。隐身、喷气背包、滑翔翼；步枪、霰弹枪和捕网枪；还有一架为全队掀开
+        迷雾的侦察无人机。</p>
+      </div>
+      <div class="card">
+        <p class="role">守卫</p><p class="who">刺猬哥 · 刺猬</p>
+        <p>90 血，狙击枪和手雷，能给队友或信标罩一层护盾。会飞、会滑翔。火箭已经飞来时，
+        站到前面的也是他。</p>
+      </div>
+    </div>
+  </section>
+
+  <figure class="shot">
+    <img src="assets/03-territory.jpg" width="1600" height="1000"
+         alt="一座信标站在它为阵营计分的那片领地中央。">
+    <figcaption>一座信标，以及它为你的阵营计分的那片地。</figcaption>
+  </figure>
+
+  <section>
+    <h2>不只是开枪，还要造</h2>
+    <p class="lede">点数也能买 Autometa，Autometa 换来机器人。守卫只能在自己桅杆的作用圈
+    里接线；守卫阵亡后，可以在它留下的地基上重建。</p>
+    <div class="cols">
+      <div class="card"><p class="who">COMBAT 火力</p>
+        <p>在主人的回合开火，必定命中 —— 没有风，也没有瞄准窗口。</p></div>
+      <div class="card"><p class="who">WATCHER 观察</p>
+        <p>标记敌人并破除隐身。它的标记是大多数其他 trait 读取的对象。</p></div>
+      <div class="card"><p class="who">BULWARK 壁垒</p>
+        <p>削减站在它圈内的友方所受的伤害。</p></div>
+      <div class="card"><p class="who">PHALANX 方阵</p>
+        <p>与光环内所有人分担伤害。</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>还有这些</h2>
+    <ul class="plain">
+      <li>六页彩绘漫画 <strong>《信标骑士》</strong>，讲这一切的来历。</li>
+      <li>四个房间的训练大厅，一只输过的猫头鹰会带你走一遍生命条、移动和蓄力。</li>
+      <li>存档局面讲解，一次一个气泡地讲清楚棋盘。</li>
+      <li>英文与中文，随时切换。</li>
+    </ul>
+  </section>
+</main>
+
+<footer>
+  <div class="row">
+    <a href="privacy.html">Privacy policy / 隐私政策</a>
+    <a href="https://github.com/chanliu1983/beacon-tactic-site/issues/new">Report a problem / 反馈问题</a>
+    <a href="https://github.com/chanliu1983/beacon-tactic-site">Source of this page</a>
+  </div>
+  <div id="foot-note">&copy; 2026 Lei Liu. All rights reserved.</div>
+</footer>
+
+</div>
+
+<script>
+(function () {
+  var en = document.getElementById('en');
+  var zh = document.getElementById('zh');
+  var btnEn = document.getElementById('btn-en');
+  var btnZh = document.getElementById('btn-zh');
+  var foot = document.getElementById('foot-note');
+  function set(lang) {
+    var z = lang === 'zh';
+    en.hidden = z; zh.hidden = !z;
+    btnEn.setAttribute('aria-pressed', String(!z));
+    btnZh.setAttribute('aria-pressed', String(z));
+    document.documentElement.lang = z ? 'zh-Hans' : 'en';
+    foot.textContent = z ? '© 2026 Lei Liu，保留所有权利。'
+                         : '© 2026 Lei Liu. All rights reserved.';
+  }
+  btnEn.addEventListener('click', function () { set('en'); });
+  btnZh.addEventListener('click', function () { set('zh'); });
+})();
+</script>
+</body>
+</html>

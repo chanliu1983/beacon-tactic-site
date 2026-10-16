@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — Beacon Tactic</title>
+<meta name="description" content="Privacy Policy for Beacon Tactic. No accounts, no analytics, no advertising, no in-app purchases.">
+<style>
+  :root {
+    --bg: #12141a;
+    --panel: #1a1d26;
+    --ink: #e8e6e1;
+    --dim: #a4a8b4;
+    --gold: #e0b74a;
+    --line: #2c303c;
+  }
+  @media (prefers-color-scheme: light) {
+    :root { --bg:#fbfaf7; --panel:#ffffff; --ink:#1c1f26; --dim:#5d6270; --line:#e2e0da; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue",
+          "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 40px 22px 96px; }
+  header { display: flex; align-items: flex-start; gap: 16px; flex-wrap: wrap;
+           border-bottom: 1px solid var(--line); padding-bottom: 22px; }
+  .brand { flex: 1 1 auto; min-width: 220px; }
+  h1 { font-size: 1.6rem; margin: 0 0 6px; letter-spacing: -0.01em; }
+  .sub { color: var(--dim); font-size: 0.92rem; margin: 0; }
+  .lang { display: inline-flex; border: 1px solid var(--line); border-radius: 999px;
+          overflow: hidden; background: var(--panel); }
+  .lang button {
+    appearance: none; border: 0; background: transparent; color: var(--dim);
+    font: inherit; font-size: 0.88rem; padding: 7px 16px; cursor: pointer;
+  }
+  .lang button[aria-pressed="true"] { background: var(--gold); color: #17191f; font-weight: 600; }
+  .lang button:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
+  h2 { font-size: 1.12rem; margin: 2.1em 0 .5em; letter-spacing: -0.005em; }
+  h2:first-of-type { margin-top: 1.7em; }
+  p, li { margin: 0 0 .85em; }
+  ul { padding-left: 1.25em; }
+  strong { font-weight: 650; }
+  .lead { font-size: 1.05rem; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+          padding: 16px 18px; margin: 0 0 1em; }
+  .card p:last-child { margin-bottom: 0; }
+  .meta { color: var(--dim); font-size: 0.86rem; margin-top: 3em;
+          padding-top: 16px; border-top: 1px solid var(--line); }
+  .meta a { color: var(--gold); }
+  .tag { display: inline-block; border: 1px solid var(--line); border-radius: 6px;
+         padding: 1px 8px; font-size: 0.8rem; color: var(--dim); }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="brand">
+    <h1 id="h-title">Privacy Policy</h1>
+    <p class="sub" id="h-sub">Beacon Tactic &middot; &copy; 2026 Lei Liu</p>
+  </div>
+  <div class="lang" role="group" aria-label="Language">
+    <button id="btn-en" type="button" aria-pressed="true">English</button>
+    <button id="btn-zh" type="button" aria-pressed="false">中文</button>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================ ENGLISH ============================ -->
+<section id="en" lang="en">
+
+  <p class="lead"><strong>Beacon Tactic does not collect, store, transmit or sell
+  any personal data.</strong> There are no accounts to create, no email address to
+  give, and nothing is sent to the developer.</p>
+
+  <div class="card">
+    <p><span class="tag">No accounts</span> <span class="tag">No analytics</span>
+       <span class="tag">No advertising</span> <span class="tag">No in-app purchases</span>
+       <span class="tag">No crash reporting</span></p>
+  </div>
+
+  <h2>1. Summary</h2>
+  <p>The game runs entirely on your own computer. It has no sign-in, no user
+  accounts, no advertising SDKs, no analytics or telemetry library, and no crash
+  or error reporting. It contains no in-app purchases. Nothing you do in the game
+  reaches the developer.</p>
+
+  <h2>2. What is stored on your device</h2>
+  <p>The game writes two things to your own user data folder. Both stay on your
+  computer, are readable only by the game, and are never uploaded:</p>
+  <ul>
+    <li><strong>Settings</strong> — a small preferences file holding your UI
+    language, window size, whether your microphone and speaker are enabled, any
+    player names you have muted, and your saved crew loadouts.</li>
+    <li><strong>Board snapshots</strong> — positions you saved yourself with the
+    in-game save key (F8 on a keyboard), used to restore a match, plus the
+    training position used by the practice walkthrough.</li>
+  </ul>
+  <p>Deleting the game removes them. There is no other local storage.</p>
+
+  <h2>3. Voice chat</h2>
+  <p>If you turn on voice in a multiplayer match, the game captures your microphone
+  <strong>only while you are holding the push-to-talk control</strong>, and sends
+  those few seconds directly to the other people in that same match, over the
+  connection the match already uses.</p>
+  <p>Voice audio is <strong>never recorded, never saved to disk, and never sent to
+  the developer</strong>. It is not stored by the game or by any relay. When voice
+  is off, the microphone is not used at all. Voice is disabled by default.</p>
+
+  <h2>4. Network connections</h2>
+  <p>The game only opens a network connection when you ask it to, by starting or
+  joining a multiplayer match:</p>
+  <ul>
+    <li><strong>LAN play</strong> — direct connections to other players on your own
+    local network, plus a brief local network broadcast (UDP port 7780) so nearby
+    computers can see the room you are hosting. This never leaves your local network.</li>
+    <li><strong>Online play</strong> — a WebSocket relay that you configure yourself.
+    It defaults to <code>127.0.0.1:7800</code>, meaning a relay you run on your own
+    machine. The relay forwards game packets between players; the developer does
+    not operate it and does not receive their contents.</li>
+    <li><strong>Steam</strong> — the Steam edition may use Steam's own networking and
+    voice services, which are governed by the Steam privacy policy and by your Steam
+    settings. The Mac App Store edition contains no Steam integration at all.</li>
+  </ul>
+  <p>As with any network connection, the server or peer you connect to necessarily
+  sees your IP address. Single-player play opens no network connection at all.</p>
+
+  <h2>5. Children</h2>
+  <p>The game is suitable for all ages. It contains cartoon artillery violence with
+  no blood, no nudity, no user-generated content, no advertising and no in-app
+  purchases. Because it collects no data, it does not knowingly collect any
+  personal information from children.</p>
+
+  <h2>6. Third parties</h2>
+  <p>No analytics, advertising, attribution or crash-reporting SDK is included in
+  the build. Single-player play contacts no third party. Multiplayer connects only
+  to the peers or relay you selected yourself.</p>
+
+  <h2>7. Your rights and control</h2>
+  <p>Because no data is collected, there is nothing for the developer to access,
+  correct, export or delete on your behalf. You have complete control: everything
+  the game stores is a file in your own folder, and deleting the game, or deleting
+  that folder, removes it permanently.</p>
+
+  <h2>8. Changes to this policy</h2>
+  <p>If a future version changes what the game transmits or stores, this page will be
+  updated before that version ships, and the effective date below will change.</p>
+
+  <h2>9. Contact</h2>
+  <p>Questions about this policy, or anything else about the game, can be raised as
+  an issue on the project's public repository:
+  <a href="https://github.com/chanliu1983/beacon-tactic-site/issues/new">github.com/chanliu1983/beacon-tactic-site/issues</a>.
+  Issues may be written in English or Chinese.</p>
+
+  <p class="meta">Effective date: 16 October 2026. &copy; 2026 Lei Liu.</p>
+</section>
+
+<!-- ============================== 中文 ============================== -->
+<section id="zh" lang="zh-Hans" hidden>
+
+  <p class="lead"><strong>《Beacon Tactic》不收集、不存储、不传输、不出售任何个人数据。</strong>
+  没有账号要注册，不需要邮箱，任何信息都不会发给开发者。</p>
+
+  <div class="card">
+    <p><span class="tag">无账号</span> <span class="tag">无统计</span>
+       <span class="tag">无广告</span> <span class="tag">无内购</span>
+       <span class="tag">无崩溃上报</span></p>
+  </div>
+
+  <h2>1. 摘要</h2>
+  <p>游戏完全在你的电脑上运行。没有登录，没有用户账号，没有广告 SDK，没有统计或遥测库，也没有崩溃或错误上报。游戏不含内购。你在游戏里的任何操作都不会传到开发者那里。</p>
+
+  <h2>2. 存储在本机的数据</h2>
+  <p>游戏只会在你自己的用户数据目录里写两样东西。两者都留在你的电脑上，只有游戏能读取，永远不会上传：</p>
+  <ul>
+    <li><strong>设置</strong>——一个小小的偏好文件，保存界面语言、窗口大小、麦克风和扬声器是否开启、你静音过的玩家昵称，以及保存的队伍配置。</li>
+    <li><strong>棋盘快照</strong>——你用游戏内存档按键（键盘上的 F8）亲自保存的局面，用于恢复对局，以及练习讲解用的训练局面。</li>
+  </ul>
+  <p>删除游戏即一并删除。除此之外没有其他本地存储。</p>
+
+  <h2>3. 语音聊天</h2>
+  <p>如果你在多人对局中开启语音，游戏<strong>只在你按住按住说话按键期间</strong>采集麦克风，并把这几秒音频通过该对局已在使用的连接，直接发给同一局里的其他玩家。</p>
+  <p>语音音频<strong>绝不会被录制、不会被保存到磁盘、也绝不会被发给开发者</strong>。游戏和任何 relay 都不会存储它。语音默认关闭，关闭时麦克风完全不会被使用。</p>
+
+  <h2>4. 网络连接</h2>
+  <p>只有当你主动开始或加入多人对局时，游戏才会建立网络连接：</p>
+  <ul>
+    <li><strong>局域网联机</strong>——与你本地网络内其他玩家的直连，以及一次很短的本地网络广播（UDP 7780 端口），让附近的电脑能发现你正在开的房间。这些流量不会离开你的局域网。</li>
+    <li><strong>在线联机</strong>——由你自己配置的 WebSocket relay，默认地址是 <code>127.0.0.1:7800</code>，也就是你自己机器上运行的 relay。relay 只在玩家之间转发对局数据包，开发者不运营它，也收不到其中的内容。</li>
+    <li><strong>Steam</strong>——Steam 版可能使用 Steam 自己的网络与语音服务，其规则受 Steam 隐私政策和你的 Steam 设置约束。Mac App Store 版完全不包含 Steam 集成。</li>
+  </ul>
+  <p>与任何网络连接一样，你所连接的服务器或对端必然会看到你的 IP 地址。单机模式完全不建立网络连接。</p>
+
+  <h2>5. 儿童</h2>
+  <p>本游戏适合全年龄。内容为卡通炮击，无血腥、无裸露、无用户生成内容、无广告、无内购。由于不收集任何数据，本游戏不会有意收集儿童的个人信息。</p>
+
+  <h2>6. 第三方</h2>
+  <p>构建版本中不包含任何统计、广告、归因或崩溃上报 SDK。单机模式不联系任何第三方。多人模式只连接你自己选择的玩家或 relay。</p>
+
+  <h2>7. 你的权利与控制</h2>
+  <p>因为不收集任何数据，开发者手上没有任何可供访问、更正、导出或删除的内容。完全的控制权在你：游戏存储的一切都是你自己目录下的文件，删除游戏或删除该目录即可彻底清除。</p>
+
+  <h2>8. 政策变更</h2>
+  <p>如果未来的版本改变了游戏的传输或存储内容，本页面会在该版本发布前更新，下方的生效日期也会随之改变。</p>
+
+  <h2>9. 联系方式</h2>
+  <p>关于本政策或游戏的任何疑问，都可以在项目的公开仓库提 issue：
+  <a href="https://github.com/chanliu1983/beacon-tactic-site/issues/new">github.com/chanliu1983/beacon-tactic-site/issues</a>。
+  使用中文或英文提交都可以。</p>
+
+  <p class="meta">生效日期：2026 年 10 月 16 日。© 2026 Lei Liu，保留所有权利。</p>
+</section>
+
+</main>
+</div>
+
+<script>
+(function () {
+  var en = document.getElementById('en');
+  var zh = document.getElementById('zh');
+  var btnEn = document.getElementById('btn-en');
+  var btnZh = document.getElementById('btn-zh');
+  var title = document.getElementById('h-title');
+  var sub = document.getElementById('h-sub');
+
+  // English by default, and English is what stays visible if this script
+  // never runs: the <section id="zh" hidden> attribute means a JS-disabled
+  // reader still gets a complete policy rather than a blank page.
+  function set(lang) {
+    var z = lang === 'zh';
+    en.hidden = z;
+    zh.hidden = !z;
+    btnEn.setAttribute('aria-pressed', String(!z));
+    btnZh.setAttribute('aria-pressed', String(z));
+    document.documentElement.lang = z ? 'zh-Hans' : 'en';
+    title.textContent = z ? '隐私政策' : 'Privacy Policy';
+    sub.innerHTML = z ? 'Beacon Tactic &middot; &copy; 2026 Lei Liu' : 'Beacon Tactic &middot; &copy; 2026 Lei Liu';
+  }
+
+  btnEn.addEventListener('click', function () { set('en'); });
+  btnZh.addEventListener('click', function () { set('zh'); });
+})();
+</script>
+</body>
+</html>
