@@ -226,7 +226,6 @@
   var btnEn = document.getElementById('btn-en');
   var btnZh = document.getElementById('btn-zh');
   var title = document.getElementById('h-title');
-  var sub = document.getElementById('h-sub');
 
   // English by default, and English is what stays visible if this script
   // never runs: the <section id="zh" hidden> attribute means a JS-disabled
@@ -239,7 +238,6 @@
     btnZh.setAttribute('aria-pressed', String(z));
     document.documentElement.lang = z ? 'zh-Hans' : 'en';
     title.textContent = z ? '隐私政策' : 'Privacy Policy';
-    sub.innerHTML = z ? 'Beacon Tactic &middot; &copy; 2026 Lei Liu' : 'Beacon Tactic &middot; &copy; 2026 Lei Liu';
   }
 
   btnEn.addEventListener('click', function () { set('en'); });
