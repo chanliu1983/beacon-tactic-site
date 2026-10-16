@@ -1,0 +1,5 @@
+# macOS
+.DS_Store
+
+# Godot export scratch, if the shots are ever re-rendered from this repo
+*.import
