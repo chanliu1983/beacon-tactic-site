@@ -60,6 +60,9 @@
   }
   figcaption { margin-top:10px; font-size:.9rem; color:var(--dim); text-align:center; }
   .shot { margin:0 0 34px; }
+  .gallery { display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(272px,1fr)); }
+  .gallery figure { margin:0; }
+  .gallery figcaption { margin-top:9px; font-size:.86rem; }
 
   section { padding:52px 0; border-top:1px solid var(--line); }
   h2 { font-size:clamp(1.5rem,3.6vw,2rem); margin:0 0 18px; letter-spacing:-.02em; }
@@ -129,8 +132,15 @@
       <div class="card">
         <p class="who">It punishes a lead</p>
         <p>Every five rounds, if one side leads by more than five points, lightning
-        strikes that side's masts for 20 each. It never fells a fresh one alone — the
-        warning round is for repairing, or accepting.</p>
+        strikes that side's masts for 30 each — and the scorch holds for two more
+        rounds, so nothing gets patched in the panic. A fresh mast survives one bolt.
+        Mending is the round after, if there is one.</p>
+      </div>
+      <div class="card">
+        <p class="who">Stand on it to grind it down</p>
+        <p>A mast whose disc holds more enemy knights than friendly ones loses 8 hit
+        points for every one it is outnumbered, at every round wrap. Crowd a beacon
+        and you take it without firing a shot.</p>
       </div>
       <div class="card">
         <p class="who">Ground breaks in two bites</p>
@@ -164,8 +174,9 @@
       </div>
       <div class="card">
         <p class="role">Engineer</p><p class="who">CRIMSON the Beaver</p>
-        <p>Beacons for 25 AP and 10 m wide, repairs them, blinks home, and builds at a
-        quarter of everyone else's price. A repair bot does the walking for her.</p>
+        <p>Beacons for 25 AP and a 9 m disc, repairs them, blinks home, and builds at
+        a quarter of everyone else's price. 90 HP, 95 AP a turn. A repair bot does the
+        walking for her.</p>
       </div>
       <div class="card">
         <p class="role">Scout</p><p class="who">BOGUE the Frog</p>
@@ -200,6 +211,39 @@
         <p>Cuts incoming damage for allies standing in its ring.</p></div>
       <div class="card"><p class="who">PHALANX</p>
         <p>Shares the wounds of everyone inside its aura.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Every screen, on one page</h2>
+    <p class="lede">The menu, the crew picker, the training hall, the map and the
+    lobby — the rest of what you will be looking at.</p>
+    <div class="gallery">
+      <figure>
+        <img src="assets/04-main-menu.jpg" width="1600" height="1000"
+             alt="The main menu: a green and gold storybook emblem over the four animal crews standing in a lit loading bay.">
+        <figcaption>The menu, and the four crews waiting under it.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/05-crew-select.jpg" width="1600" height="1000"
+             alt="The crew selection screen, each animal shown with its role and its stat line.">
+        <figcaption>Picking a crew, with every gap spelled out.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/07-training-hall.jpg" width="1600" height="1000"
+             alt="The training hall, a room where an owl walks a new knight through a turn.">
+        <figcaption>The training hall: an owl who has lost before walks you through it.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/06-tactics-map.jpg" width="1600" height="1000"
+             alt="The tactics map: the whole board from above, each knight's crew marked by a shape and each side's vision drawn as a cone.">
+        <figcaption>The tactics map — the whole board, everyone's reach.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/08-lobby.jpg" width="1600" height="1000"
+             alt="A network lobby with eight seats, four a side, two of them human players and the rest AI.">
+        <figcaption>An eight-seat lobby. Beacon War is the only mode.</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -245,8 +289,14 @@
     <div class="cols">
       <div class="card">
         <p class="who">领先会招来雷击</p>
-        <p>每五回合，如果一方领先超过 5 分，那一方的信标会被每座扣 20 血。不足以一击
-        击倒一座新的，那一轮留给你修补，或者接受。</p>
+        <p>每五回合，如果一方领先超过 5 分，那一方的信标会被每座扣 30 血，余烬还会
+        再灼两轮 —— 慌乱中什么都补不上。一座满血的新桅杆扛得住一发。修补是之后
+        那一轮的事，也许可就没有了。</p>
+      </div>
+      <div class="card">
+        <p class="who">站上去就能磨死它</p>
+        <p>一座桅杆的领地圈里敌方骑士比己方多几个，每到回合结算就多掉 8 点耐久。
+        围住一座信标，不用开一枪也能把它拿下。</p>
       </div>
       <div class="card">
         <p class="who">地面要打两次才开</p>
@@ -278,8 +328,8 @@
       </div>
       <div class="card">
         <p class="role">工程</p><p class="who">克里姆森 · 河狸</p>
-        <p>信标只要 25 行动点、半径 10 米，能修补、能闪现回家，建造只要别人四分之一的价格。
-        还有一只库珀机器人替她跑腿。</p>
+        <p>信标只要 25 行动点、半径 9 米，能修补、能闪现回家，建造只要别人四分之一的价格。
+        90 血，每回合 95 行动点。还有一只库珀机器人替她跑腿。</p>
       </div>
       <div class="card">
         <p class="role">侦察</p><p class="who">博格 · 青蛙</p>
@@ -313,6 +363,38 @@
         <p>削减站在它圈内的友方所受的伤害。</p></div>
       <div class="card"><p class="who">PHALANX 方阵</p>
         <p>与光环内所有人分担伤害。</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>所有界面，一页看完</h2>
+    <p class="lede">主菜单、选人、训练大厅、战术图、房间 —— 剩下的都在这里。</p>
+    <div class="gallery">
+      <figure>
+        <img src="assets/04-main-menu.jpg" width="1600" height="1000"
+             alt="主菜单：绿金配色的绘本徽章，下面站着四名动物骑士。">
+        <figcaption>主菜单，以及徽章下等着你的四个角色。</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/05-crew-select.jpg" width="1600" height="1000"
+             alt="角色选择界面，每只动物都标着定位与属性。">
+        <figcaption>开局选人，每个角色的破绽都写清楚了。</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/07-training-hall.jpg" width="1600" height="1000"
+             alt="训练大厅的一间屋子，一只猫头鹰正带新骑士走完一个回合。">
+        <figcaption>训练大厅：一只输过的猫头鹰带你走一遍。</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/06-tactics-map.jpg" width="1600" height="1000"
+             alt="战术地图：俯视整张棋盘，每名骑士用形状标出角色，双方视野画成扇形。">
+        <figcaption>战术地图 —— 整张棋盘，每个人的射程。</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/08-lobby.jpg" width="1600" height="1000"
+             alt="联机房间的八个席位，两边各四席，其中两位真人，其余为 AI。">
+        <figcaption>八席房间。Beacon War 是唯一的模式。</figcaption>
+      </figure>
     </div>
   </section>
 

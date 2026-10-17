@@ -39,14 +39,26 @@ the game's own rules placing the beacons, explosions, voxels and guards, then
 each scene framed and frozen. The seed matters — re-rendering without it
 produces a different map and these no longer match each other.
 
-They were captured by `tests/store_shot.gd` in the game repository. Re-run with:
+They were captured by two scripts in the game repository:
 
 ```
-godot --path . res://tests/store_shot.tscn          # with the in-game HUD
-godot --path . res://tests/store_shot.tscn -- --clean   # HUD hidden
+godot --path . res://tests/store_shot.tscn      # 01-03, the three battle scenes
+godot --path . res://tests/marketing_shot.tscn  # 04-08, the menu and lobby screens
+godot --path . res://tests/store_shot.tscn -- --clean   # 01-03 again, HUD hidden
 ```
 
-The three clean images in `../screenshots/` are the `--clean` output.
+The three clean images in `../screenshots/` are the `--clean` output, and
+`../assets/` holds the web-page copies of every shot as 1600 × 1000 JPEG.
+
+Two details worth keeping if they are ever re-shot:
+
+* **Both scripts render at the native 2880 × 1800.** The older menu captures
+  were pinned to 1600 × 900 and upscaled, and they were visibly soft next to
+  the battle shots. Nothing pins the window size now.
+* **`07_main_menu` has its dev footer blanked.** The menu's bottom-right line
+  reads `v0.2.0 · mp17 · LAN build` in a LAN or Early Access build — honest
+  there, but a store shot naming the protocol tag dates the whole set at the
+  next `mp` bump, so `marketing_shot.gd` clears it just before the capture.
 
 ---
 
@@ -83,5 +95,21 @@ The three clean images in `../screenshots/` are the `--clean` output.
 制造爆炸、堆体素和守卫，然后逐张取景冻结。种子是关键 —— 不固定它重拍出来的
 地图就不一样，这八张图也就对不上了。
 
-由游戏仓库里的 `tests/store_shot.gd` 生成，重拍命令见上。
-`../screenshots/` 里的三张是无 HUD 版本（`--clean`）。
+由游戏仓库里的两个脚本生成：
+
+```
+godot --path . res://tests/store_shot.tscn      # 01-03，三张战斗图
+godot --path . res://tests/marketing_shot.tscn  # 04-08，主菜单与房间
+godot --path . res://tests/store_shot.tscn -- --clean   # 01-03 再拍一次，无 HUD
+```
+
+`../screenshots/` 里的三张是 `--clean` 的产物；`../assets/` 是网页用的压缩版
+（1600 × 1000 JPEG）。
+
+重拍时有两点要留意：
+
+* **两个脚本都按原生 2880 × 1800 渲染。** 早先几张界面图锁在 1600 × 900 再放大，
+  和战斗图并排看明显发虚；现在不再锁窗口尺寸。
+* **`07_main_menu` 的开发版页脚被清空了。** 主菜单右下角在局域网/抢先体验版本里
+  写着 `v0.2.0 · mp17 · LAN build` —— 在那里是如实标注，但商店图上标出协议版本号，
+  下次 `mp` 一动整套图就过时了，所以 `marketing_shot.gd` 在截图前把它清掉。
